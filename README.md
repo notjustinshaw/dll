@@ -1,8 +1,15 @@
 # Doubly Linked List
 An implementation of a doubly-linked list in Rust.
 
+```
+            --------            --------            --------
+  front ==> | list | === rc ==> | list | === rc ==> | list |
+            | node | <---weak-- | node | <---weak-- | node |  <-- back
+            --------            --------            --------
+```
+
 ## Description
-The purpose of this library is to explore how you would make a doubly-linked list in Rust, a type-safe low-level programming language. Since a doubly-linked list has both forward and backward links, a typical implementation would use raw pointers. Using raw pointers is considered unsafe and can lead to various issues in large codebases like memory leaks, dangling pointers, use-after-free, etc.
+The purpose of this library is to explore how you would make a doubly-linked list in Rust, a type-safe low-level programming language. Since a doubly-linked list has both forward and backward links, a typical implementation would use raw pointers. Using raw pointers is considered unsafe and can lead to various issues like memory leaks, dangling pointers, use-after-free, etc.
 
 The purpose of this library is to see how you would write this entirely in ["safe Rust"](https://doc.rust-lang.org/nomicon/meet-safe-and-unsafe.html) with ["Strong" (rc) Pointers](https://doc.rust-lang.org/std/rc/struct.Rc.html) going forwards and [Weak Pointers](https://doc.rust-lang.org/std/rc/struct.Weak.html) going backwards. The strong pointers are reference-counted and will free the memory when the ref count drops to zero. On the other hand, weak pointers do not have ownership of their referent and do not count towards the total reference count of the memory (though they can be "[promoted](https://doc.rust-lang.org/std/rc/struct.Weak.html#method.upgrade)" to a normal strong pointer if needed, like in a backwards traversal).
 
